@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Error;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -79,17 +78,31 @@ class DashboardController extends Controller
 
     public function articles(): View
     {
+        $userLogin = Auth::user();
         return view('dashboard.articles.index', [
             'pageTitle' => 'Articles',
             'active' => 'articles',
+            'userLogin' => $userLogin,
         ]);
     }
 
     public function detailArticle(string $id): View
     {
+        $userLogin = Auth::user();
         return view('dashboard.articles.detail', [
             'pageTitle' => 'Detail Article ' . $id,
             'active' => 'articles',
+            'userLogin' => $userLogin,
+        ]);
+    }
+
+    public function viewCreateArticle(): View
+    {
+        $userLogin = Auth::user();
+        return view('dashboard.articles.create', [
+            'pageTitle' => 'Create Article',
+            'active' => 'articles',
+            'userLogin' => $userLogin,
         ]);
     }
 }

@@ -12,9 +12,9 @@ class Article extends Model
     protected $fillable = [
         'title',
         'slug',
-        'image',
+        'thubnail',
         'content',
-        'category_id',
+        'categories',
         'user_id',
     ];
 
@@ -27,10 +27,5 @@ class Article extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
-    }
-
-    public function category(): BelongsTo
-    {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 }

@@ -5,7 +5,7 @@
         <div class="max-w-5xl mx-auto border border-white p-5 rounded-lg">
             <div class="flex flex-col items-center md:flex-row">
 
-                <div class="w-full space-y-5 mb-5 md:md-0 md:w-3/5 md:pr-16">
+                <div class="w-full space-y-5 md:mb-5 md:md-0 md:w-3/5 md:pr-16">
                     <p class="font-medium text-white uppercase">Maerifa</p>
                     <h2 class="text-2xl font-extrabold leading-none text-white sm:text-3xl md:text-5xl">
                         The best article forum of all time.
@@ -13,7 +13,7 @@
                     <p class="text-xl text-gray-600 md:pr-16">Mari belajar dan berkembang bersama maerifa.</p>
                 </div>
 
-                <div class="w-full mt-16 md:mt-0 md:w-2/5">
+                <div class="w-full mt-5 md:mt-0 md:w-2/5">
                     <form action="{{ route('login') }}" method="post">
                         @csrf
                         <div class="relative z-10 h-auto p-8 py-10 overflow-hidden bg-white border-b-2 border-gray-300 rounded-lg shadow-2xl px-7 p-5"

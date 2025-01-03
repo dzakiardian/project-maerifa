@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\HomeController;
@@ -23,6 +24,12 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function() {
     Route::post('/change-password/{id}', [DashboardController::class, 'changePassword'])->name('dashboard.change-password');
     Route::get('/articles', [DashboardController::class, 'articles'])->name('dashboard.articles');
     Route::get('/article/{id}', [DashboardController::class, 'detailArticle'])->name('dashboard.detail-article');
+    Route::get('/create-article', [DashboardController::class, 'viewCreateArticle'])->name('dashboard.create-article');
+
+    Route::prefix('articles')->group(function() {
+        Route::post('/', [ArticleController::class, 'createArticle'])->name('articles-create-article');
+        Route::post('/upload-file-article', [ArticleController::class, 'uploadFileArticle'])->name('upload');
+    });
 });
 
 

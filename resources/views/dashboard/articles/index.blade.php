@@ -9,7 +9,7 @@
 
         <!-- Content -->
         <div class="p-6">
-            <button class="btn bg-green-500 text-white font-bold px-10 mb-5">Create Article</button>
+            <button class="btn bg-green-500 text-white font-bold px-10 mb-5 hover:bg-green-400" onclick="document.location.href = '/dashboard/create-article'">Create Article</button>
             <div class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach ([1,2,3,4,5,6,7,8] as $item)
                 <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
@@ -17,7 +17,7 @@
                       <h2 class="card-title">Aku sedang belajar laravel</h2>
                       <p>Learn in 2/22/2024</p>
                       <div class="card-actions justify-end">
-                        <button class="btn bg-green-500 text-white" onclick="return document.location.href = '/dashboard/article/12345'">Show Detail</button>
+                        <button class="btn bg-green-500 text-white hover:bg-green-400" onclick="return document.location.href = '/dashboard/article/12345'">Show Detail</button>
                       </div>
                     </div>
                   </div>

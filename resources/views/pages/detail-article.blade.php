@@ -38,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <article class="pl-5 pb-5 lg:pb-10 lg:mt-10">
+            <article class="md:pl-5 pb-5 lg:pb-10 lg:mt-10">
                 <p class="max-w-3xl mt-5 text-xl text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Delectus iure dolore rem consectetur distinctio nesciunt libero nobis pariatur. Asperiores, commodi,
                     soluta architecto, rem nulla recusandae minus voluptatibus ad sapiente nisi est ullam ut numquam
@@ -72,6 +72,43 @@
                     doloremque? Amet, inventore reprehenderit? Soluta consectetur distinctio voluptatum nesciunt esse natus
                     quod eveniet dolores sed labore sequi itaque velit nam, officiis repellat.</p>
             </article>
+        </section>
+        <section id="comments" class="pb-5 px-3 lg:mx-24">
+            <div class="card bg-base-100 w-full lg:w-2/3 shadow-xl mx-auto lg:mx-0">
+                <div class="card-body">
+                  <h2 class="card-title">Comments</h2>
+                  <p>Berikan masukan kepada pembuat artikel</p>
+                  <div class="card-actions justify-center mt-3">
+                    <button class="btn px-8 bg-green-600 text-white hover:bg-green-400">Comment</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card bg-base-100 w-full shadow-xl mx-auto mt-5 lg:w-2/3 lg:mx-0">
+                <div class="card-body">
+                  <h2 class="card-title">All Comments</h2>
+                  <div class="bg-slate-200 p-5 rounded-md flex items-center gap-3">
+                    <img src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="gambar" class="h-10 rounded-full">
+                    <div class="text">
+                        <h3 class="font-semibold">Username</h3>
+                        <p class="text-sm font-normal">bismillah semoga c nya c bener lagi yaa c coba baca bismillah semoga key c nya baugs caaaa</p>
+                    </div>
+                  </div>
+                  <div class="bg-slate-200 p-5 rounded-md flex items-center gap-3">
+                    <img src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="gambar" class="h-10 rounded-full">
+                    <div class="text">
+                        <h3 class="font-semibold">Username</h3>
+                        <p class="text-sm font-normal">bismillah semoga c nya c bener lagi yaa c coba baca bismillah semoga key c nya baugs caaaa</p>
+                    </div>
+                  </div>
+                  <div class="bg-slate-200 p-5 rounded-md flex items-center gap-3">
+                    <img src="https://media.istockphoto.com/id/1495088043/vector/user-profile-icon-avatar-or-person-icon-profile-picture-portrait-symbol-default-portrait.jpg?s=612x612&w=0&k=20&c=dhV2p1JwmloBTOaGAtaA3AW1KSnjsdMt7-U_3EZElZ0=" alt="gambar" class="h-10 rounded-full">
+                    <div class="text">
+                        <h3 class="font-semibold">Username</h3>
+                        <p class="text-sm font-normal">bismillah semoga c nya c bener lagi yaa c coba baca bismillah semoga key c nya baugs caaaa</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
         </section>
     </section>
     <hr class="text-slate-200">

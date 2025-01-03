@@ -18,9 +18,4 @@ class Category extends Model
         parent::boot();
         static::creating(fn($model) => empty($model->id) ? $model->id = rand(10000, 100000) : '');
     }
-
-    public function articles(): HasMany
-    {
-        return $this->hasMany(Article::class, 'category_id', 'id');
-    }
 }
