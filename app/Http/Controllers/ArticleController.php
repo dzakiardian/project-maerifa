@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
+use App\Models\Article;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
     public function createArticle(ArticleRequest $request)
     {
-        $request->validated();
+        $rules = $request->validated();
 
-        dd('bener cuyy');
+        if($request->hasFile('thumbnail')) {
+            $fileName = time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $request->file('thumbnail')->storeAs('thumbnails', $fileName, 'public');
+            $rules['thumbnail'] = $fileName;
+        }
+
+        $rules['user_id'] = Auth::user()->id;
+        Article::create($rules);
+
+        return redirect('/dashboard/articles')->with('success-message', 'Artikel berhasil dibuat!');
     }
 
     public function uploadFileArticle(Request $request)

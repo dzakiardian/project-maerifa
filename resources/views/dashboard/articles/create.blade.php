@@ -13,7 +13,7 @@
                 <div class="card-body">
                     <h2 class="card-title">Create Article</h2>
                     <p>Curahkan apa yang ada di dalam pikiranmu disini</p>
-                    <form action="{{ route('articles-create-article') }}" method="post">
+                    <form action="{{ route('articles-create-article') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <label class="form-control w-full">
                             <div class="label">
@@ -23,7 +23,7 @@
                                 class="input input-bordered w-full" />
                             <div class="label">
                                 @error('title')
-                                    <span class="label-text-alt">{{ $message }}</span>
+                                    <span class="label-text-alt text-red-700">{{ $message }}</span>
                                 @enderror
                             </div>
                         </label>
@@ -35,7 +35,7 @@
                                 class="input input-bordered w-full" />
                             <div class="label">
                                 @error('slug')
-                                <span class="label-text-alt">{{ $message }}</span>
+                                <span class="label-text-alt text-red-700">{{ $message }}</span>
                                 @enderror
                             </div>
                         </label>
@@ -43,7 +43,8 @@
                             <div class="label">
                                 <span class="label-text">Pick Category</span>
                             </div>
-                            <select class="select select-bordered" name="categories" id="categories" multiple>
+                            <input type="hidden" name="categories" id="categories-input-hidden">
+                            <select class="select select-bordered" id="categories" multiple>
                                 <option>Personal</option>
                                 <option>Islamic</option>
                                 <option>Harry Potter</option>
@@ -53,18 +54,19 @@
                             </select>
                             <div class="label">
                                 @error('categories')
-                                <span class="label-text-alt">{{ $message }}</span>
+                                <span class="label-text-alt text-red-700">{{ $message }}</span>
                                 @enderror
                             </div>
                         </label>
                         <label class="form-control w-full">
                             <div class="label">
-                                <span class="label-text">Thubnail</span>
+                                <span class="label-text">Thumbnail</span>
                             </div>
-                            <input type="file" name="thubnail" class="file-input file-input-bordered w-full" />
+                            <input type="file" name="thumbnail" id="thumbnail" class="file-input file-input-bordered w-full" onchange="previewThumbnail()" />
+                            <img alt="thumbnail" class="rounded-xl mt-5 hidden" id="frame">
                             <div class="label">
-                                @error('thubnail')
-                                <span class="label-text-alt">{{ $message }}</span>
+                                @error('thumbnail')
+                                <span class="label-text-alt text-red-700">{{ $message }}</span>
                                 @enderror
                             </div>
                         </label>
@@ -74,7 +76,7 @@
                         <textarea name="content" id="content" name="content" cols="30" rows="10"></textarea>
                         <div class="label">
                             @error('content')
-                            <span class="label-text-alt">{{ $message }}</span>
+                            <span class="label-text-alt text-red-700">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="mt-5 card-actions justify-end">
@@ -92,10 +94,11 @@
         const inputSlug = document.getElementById('slug');
 
         inputTitle.addEventListener('change', () => {
-            inputSlug.value = inputTitle.value.split(' ').join('-');
+            inputSlug.value = inputTitle.value.split(' ').join('-').toLowerCase();
         });
 
         // multi select tag
+        const inputCategories = document.getElementById('categories-input-hidden');
         new MultiSelectTag('categories', {
             rounded: true,
             shadow: true,
@@ -108,8 +111,23 @@
             onChange: function(values) {
                 const itemValue = values.map((item) => item.value);
 
-                console.log(itemValue.join(','))
+                inputCategories.value = itemValue.join(',');
             }
-        })
+        });
+
+        // preview thumbnail
+        function previewThumbnail() {
+            const inputThumbnail =  document.getElementById('thumbnail');
+            const frame = document.getElementById('frame');
+
+            frame.classList.toggle('hidden');
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(inputThumbnail.files[0]);
+
+            oFReader.onload = (oFEvent) => {
+                frame.src = oFEvent.target.result;
+            }
+        }
     </script>
 @endsection

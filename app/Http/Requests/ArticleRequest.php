@@ -25,7 +25,7 @@ class ArticleRequest extends FormRequest
             'title' => ['required', 'min:3', 'max:255'],
             'slug' => ['required', 'min:3', 'unique:articles,slug'],
             'categories' => ['required'],
-            'thubnail' => ['required', 'file', 'mimes:png,jpg,jpeg', 'max:2048'],
+            'thumbnail' => ['required', 'image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'content' => ['required'],
         ];
     }
