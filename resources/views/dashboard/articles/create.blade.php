@@ -120,7 +120,7 @@
             const inputThumbnail =  document.getElementById('thumbnail');
             const frame = document.getElementById('frame');
 
-            frame.classList.toggle('hidden');
+            frame.classList.remove('hidden');
 
             const oFReader = new FileReader();
             oFReader.readAsDataURL(inputThumbnail.files[0]);

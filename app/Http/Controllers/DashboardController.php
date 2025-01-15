@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -78,21 +79,25 @@ class DashboardController extends Controller
 
     public function articles(): View
     {
+        $articles = Article::where('user_id', '=', Auth::user()->id)->get();
         $userLogin = Auth::user();
         return view('dashboard.articles.index', [
             'pageTitle' => 'Articles',
             'active' => 'articles',
             'userLogin' => $userLogin,
+            'articles' => $articles,
         ]);
     }
 
-    public function detailArticle(string $id): View
+    public function detailArticle(string $slug): View
     {
+        $article = Article::where('slug', '=', $slug)->first();
         $userLogin = Auth::user();
         return view('dashboard.articles.detail', [
-            'pageTitle' => 'Detail Article ' . $id,
+            'pageTitle' => 'Detail Article ' . $slug,
             'active' => 'articles',
             'userLogin' => $userLogin,
+            'article' => $article,
         ]);
     }
 
@@ -103,6 +108,18 @@ class DashboardController extends Controller
             'pageTitle' => 'Create Article',
             'active' => 'articles',
             'userLogin' => $userLogin,
+        ]);
+    }
+
+    public function categories()
+    {
+        $articles = Article::where('user_id', '=', Auth::user()->id)->get();
+        $userLogin = Auth::user();
+        return view('dashboard.categories.index', [
+            'pageTitle' => 'Categories',
+            'active' => 'categories',
+            'userLogin' => $userLogin,
+            'articles' => $articles,
         ]);
     }
 }

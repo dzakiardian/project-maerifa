@@ -23,8 +23,9 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function() {
     Route::post('/update-profile/{id}', [DashboardController::class, 'updateProfile'])->name('dashboard.update-profile');
     Route::post('/change-password/{id}', [DashboardController::class, 'changePassword'])->name('dashboard.change-password');
     Route::get('/articles', [DashboardController::class, 'articles'])->name('dashboard.articles');
-    Route::get('/article/{id}', [DashboardController::class, 'detailArticle'])->name('dashboard.detail-article');
+    Route::get('/article/{slug}', [DashboardController::class, 'detailArticle'])->name('dashboard.detail-article');
     Route::get('/create-article', [DashboardController::class, 'viewCreateArticle'])->name('dashboard.create-article');
+    Route::get('/categories', [DashboardController::class, 'categories'])->name('dashboard.categories');
 
     Route::prefix('articles')->group(function() {
         Route::post('/', [ArticleController::class, 'createArticle'])->name('articles-create-article');

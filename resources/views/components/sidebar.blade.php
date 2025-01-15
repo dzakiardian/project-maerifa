@@ -27,6 +27,20 @@
                 </li>
             </ul>
         </li>
+        <li class="mb-1 group">
+            <a href=""
+                class="flex font-semibold items-center py-2 px-4  hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle {{ $active === 'categories' ? 'bg-gray-950 text-gray-100' : 'text-gray-900' }}">
+                <i class='bx bx-file mr-3 text-lg'></i>
+                <span class="text-sm">Categories</span>
+                <i class="ri-arrow-right-s-line ml-auto group-[.selected]:rotate-90"></i>
+            </a>
+            <ul class="pl-7 mt-2 hidden group-[.selected]:block">
+                <li class="mb-4">
+                    <a href="/dashboard/categories"
+                        class="text-gray-900 text-sm flex items-center hover:text-[#f84525] before:contents-[''] before:w-1 before:h-1 before:rounded-full before:bg-gray-300 before:mr-3">View Categories</a>
+                </li>
+            </ul>
+        </li>
         <span class="text-gray-400 font-bold">Article</span>
         <li class="mb-1 group">
             <a href=""

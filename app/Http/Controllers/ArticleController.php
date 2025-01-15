@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
+
     public function createArticle(ArticleRequest $request)
     {
         $rules = $request->validated();
