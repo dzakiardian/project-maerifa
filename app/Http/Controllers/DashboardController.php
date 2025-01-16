@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -113,13 +114,13 @@ class DashboardController extends Controller
 
     public function categories()
     {
-        $articles = Article::where('user_id', '=', Auth::user()->id)->get();
+        $categories = Category::all();
         $userLogin = Auth::user();
         return view('dashboard.categories.index', [
             'pageTitle' => 'Categories',
             'active' => 'categories',
             'userLogin' => $userLogin,
-            'articles' => $articles,
+            'categories' => $categories,
         ]);
     }
 }

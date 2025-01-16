@@ -31,7 +31,7 @@
             <div id="card-create-category" class="hidden my-5 card bg-base-100 w-auto lg:w-1/2 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">Create Category</h2>
-                    <form action="{{ route('dashboard.update-profile', ['id' => $userLogin->id]) }}" method="post">
+                    <form action="{{ route('categories.create-category') }}" method="post">
                         @csrf
                         <div class="mb-2">
                             <label class="form-control w-full">
@@ -39,10 +39,11 @@
                                     <span class="label-text font-semibold">Category Name</span>
                                 </div>
                                 <input type="text" name="category_name" placeholder="Type here"
-                                    class="input input-bordered input-accent w-full" value="{{ old('category_name') }}" />
+                                    class="input input-bordered w-full @error('category_name') input-error create-category-error @enderror input-accent "
+                                    value="{{ old('category_name') }}" />
                                 <div class="label">
                                     @error('category_name')
-                                    <span class="label-text-alt">{{ $message }}</span>
+                                        <span class="label-text-alt text-red-500">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </label>
@@ -54,14 +55,14 @@
                 </div>
             </div>
             <div class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
-                @foreach ($articles as $article)
+                @foreach ($categories as $category)
                     <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
                         <div class="card-body">
-                            <h2 class="card-title">{{ $article->title }}</h2>
-                            <p>{{ $article->created_at->diffForHumans() }}</p>
+                            <h2 class="card-title">{{ $category->category_name }}</h2>
+                            <p>{{ $category->created_at->diffForHumans() }}</p>
                             <div class="card-actions justify-end">
                                 <button class="btn bg-green-500 text-white hover:bg-green-400"
-                                    onclick="return document.location.href = '/dashboard/article/{{ $article->slug }}'">Show
+                                    onclick="return document.location.href = '/dashboard/article/{{ $category->id }}'">Show
                                     Detail</button>
                             </div>
                         </div>
@@ -77,13 +78,22 @@
             toastMessage.classList.add('hidden');
         }
 
+        const cardCreateCategory = document.getElementById('card-create-category');
+        const btnCreateCategory = document.getElementById('btn-create-category');
+        const createCategoryError = document.querySelector('.create-category-error');
+
+        // condition create category error
+        if (createCategoryError) {
+            cardCreateCategory.classList.remove('hidden');
+            btnCreateCategory.innerText == 'Create Category' ? btnCreateCategory.innerText = 'Close' : btnCreateCategory
+                .innerText = 'Create Category';
+        }
+
         // create category
         function handleCreateCategory() {
-            const cardCreateCategory = document.getElementById('card-create-category');
-            const btnCreateCategory = document.getElementById('btn-create-category');
-
             cardCreateCategory.classList.toggle('hidden');
-            btnCreateCategory.innerText == 'Create Category' ? btnCreateCategory.innerText = 'Close' : btnCreateCategory.innerText = 'Create Category';
+            btnCreateCategory.innerText == 'Create Category' ? btnCreateCategory.innerText = 'Close' : btnCreateCategory
+                .innerText = 'Create Category';
         }
     </script>
 @endsection
