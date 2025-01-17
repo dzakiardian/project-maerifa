@@ -95,6 +95,7 @@ class DashboardController extends Controller
         $article = Article::where('slug', '=', $slug)->first();
         $categories = Category::all();
         $userLogin = Auth::user();
+
         return view('dashboard.articles.detail', [
             'pageTitle' => 'Detail Article ' . $slug,
             'active' => 'articles',

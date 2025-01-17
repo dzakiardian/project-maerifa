@@ -33,7 +33,11 @@
                     <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
                         <div class="card-body">
                             <h2 class="card-title">{{ $article->title }}</h2>
-                            <p>{{ $article->created_at->diffForHumans() }}</p>
+                            @if ($article->created_at == $article->updated_at)
+                            <p>Dibuat {{ $article->created_at->diffForHumans() }}</p>
+                            @else
+                            <p>Diedit {{ $article->updated_at->diffForHumans() }}</p>
+                            @endif
                             <div class="card-actions justify-end">
                                 <button class="btn bg-green-500 text-white hover:bg-green-400"
                                     onclick="return document.location.href = '/dashboard/article/{{ $article->slug }}'">Show

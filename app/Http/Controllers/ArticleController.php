@@ -51,9 +51,17 @@ class ArticleController extends Controller
         }
     }
 
-    public function editArticle(ArticleRequest $request, string $slug): RedirectResponse
+    public function editArticle(Request $request, string $slug): RedirectResponse
     {
-        $rules = $request->validated();
+        $rules = $request->validate([
+            'title' => ['required', 'min:3', 'max:255'],
+            'slug' => ['required', 'min:3', 'unique:articles,slug'],
+            'categories' => ['required'],
+            'content' => ['required'],
+        ]);
+
+        $rules['created_at'] = 'CURRENT_TIMESTAMP()';
+
         $article = Article::where('slug', '=', $slug)->first();
 
         if(!$article) {
@@ -62,7 +70,7 @@ class ArticleController extends Controller
 
         if($request->hasFile('thumbnail')) {
             if($article->thumbnail) {
-                Storage::delete('/thumbnails/' . $article->thumbnail);
+                Storage::disk('public')->delete('thumbnails/' . $article->thumbnail);
             }
             $fileName = time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
             $request->file('thumbnail')->storeAs('thumbnails', $fileName, 'public');
@@ -72,5 +80,18 @@ class ArticleController extends Controller
         $article->update($rules);
 
         return redirect("/dashboard/articles")->with("success-message", "Article success updated!");
+    }
+
+    public function deleteArticle(string $slug): RedirectResponse
+    {
+        $article = Article::where("slug", "=", $slug)->first();
+        if(!$article || $article->user_id != Auth::user()->id) {
+            return redirect('/dashboard/articles')->with('error-message', 'Forbidden');
+        }
+
+        Storage::disk('public')->delete('thumbnails/' . $article->thumbnail);
+        $article->destroy($article->id);
+
+        return redirect('/dashboard/articles')->with('success-message', 'Article success deleted!');
     }
 }

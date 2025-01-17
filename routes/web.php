@@ -31,6 +31,8 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function() {
     Route::prefix('articles')->group(function() {
         Route::post('/', [ArticleController::class, 'createArticle'])->name('articles-create-article');
         Route::post('/upload-file-article', [ArticleController::class, 'uploadFileArticle'])->name('upload');
+        Route::post('/{slug}', [ArticleController::class, 'editArticle'])->name('articles.edit-article');
+        Route::delete('/{slug}', [ArticleController::class, 'deleteArticle'])->name('articles.delete-article');
     });
 
     Route::prefix('categories')->group(function() {
