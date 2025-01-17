@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticleRequest;
 use App\Models\Article;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -48,5 +49,28 @@ class ArticleController extends Controller
             @header('Content-type: text/html; charset=utf-8');
             echo $response;
         }
+    }
+
+    public function editArticle(ArticleRequest $request, string $slug): RedirectResponse
+    {
+        $rules = $request->validated();
+        $article = Article::where('slug', '=', $slug)->first();
+
+        if(!$article) {
+            return redirect('/dashboard/articles')->with("error-message", "Article not found");
+        }
+
+        if($request->hasFile('thumbnail')) {
+            if($article->thumbnail) {
+                Storage::delete('/thumbnails/' . $article->thumbnail);
+            }
+            $fileName = time() . '.' . $request->file('thumbnail')->getClientOriginalExtension();
+            $request->file('thumbnail')->storeAs('thumbnails', $fileName, 'public');
+            $rules['thumbnail'] = $fileName;
+        }
+
+        $article->update($rules);
+
+        return redirect("/dashboard/articles")->with("success-message", "Article success updated!");
     }
 }

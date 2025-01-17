@@ -45,12 +45,9 @@
                             </div>
                             <input type="hidden" name="categories" id="categories-input-hidden">
                             <select class="select select-bordered" id="categories" multiple>
-                                <option>Personal</option>
-                                <option>Islamic</option>
-                                <option>Harry Potter</option>
-                                <option>Lord of the Rings</option>
-                                <option>Planet of the Apes</option>
-                                <option>Star Trek</option>
+                                @foreach ($categories as $category)
+                                    <option>{{ $category->category_name }}</option>
+                                @endforeach
                             </select>
                             <div class="label">
                                 @error('categories')

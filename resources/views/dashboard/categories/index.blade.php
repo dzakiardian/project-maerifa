@@ -61,9 +61,12 @@
                             <h2 class="card-title">{{ $category->category_name }}</h2>
                             <p>{{ $category->created_at->diffForHumans() }}</p>
                             <div class="card-actions justify-end">
-                                <button class="btn bg-green-500 text-white hover:bg-green-400"
-                                    onclick="return document.location.href = '/dashboard/article/{{ $category->id }}'">Show
-                                    Detail</button>
+                                <form action="{{ route('categories.delete-category', ['id' => $category->id]) }}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn bg-red-500 text-white hover:bg-red-400"
+                                    onclick="return confirm('Sure deleted this category?')">Delete</button>
+                                </form>
                             </div>
                         </div>
                     </div>

@@ -35,6 +35,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function() {
 
     Route::prefix('categories')->group(function() {
         Route::post('/', [CategoryController::class, 'createCategory'])->name('categories.create-category');
+        Route::delete('/{id}', [CategoryController::class, 'deleteCategory'])->name('categories.delete-category');
     });
 });
 

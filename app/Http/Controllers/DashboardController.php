@@ -93,22 +93,26 @@ class DashboardController extends Controller
     public function detailArticle(string $slug): View
     {
         $article = Article::where('slug', '=', $slug)->first();
+        $categories = Category::all();
         $userLogin = Auth::user();
         return view('dashboard.articles.detail', [
             'pageTitle' => 'Detail Article ' . $slug,
             'active' => 'articles',
             'userLogin' => $userLogin,
             'article' => $article,
+            'categories' => $categories,
         ]);
     }
 
     public function viewCreateArticle(): View
     {
+        $categories = Category::all();
         $userLogin = Auth::user();
         return view('dashboard.articles.create', [
             'pageTitle' => 'Create Article',
             'active' => 'articles',
             'userLogin' => $userLogin,
+            'categories' => $categories,
         ]);
     }
 
