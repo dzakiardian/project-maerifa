@@ -6,17 +6,11 @@
         <div class="mx-auto max-w-7xl">
             @include('components.navbar')
         </div>
-        <section class="mx-5 lg:mx-24 mt-10">
-            <div class="flex flex-col items-center sm:px-5 md:flex-row">
-                <div class="w-full md:w-1/2">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
-                            src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg">
-                    </a>
-                </div>
-                <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
+        <section class="mx-5 lg:mx-24 mt-10 mb-5">
+            <div class=" ">
+                <div class="items-start justify-center w-full h-full py-6 mb-6 md:mb-0">
                     <div
-                        class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
+                        class="flex flex-col items-start justify-center h-full space-y-3 transform md:space-y-5">
                         <div
                             class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
                             <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"
@@ -35,10 +29,16 @@
                             <span class="mx-1">April 23rd, 2021</span> · <span class="mx-1 text-gray-600">5 min.
                                 read</span>
                         </p>
-                    </div>
+                    </dib
+                </div>
+                <div class="w-full">
+                    <a href="#_" class="block">
+                        <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
+                            src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg">
+                    </a>
                 </div>
             </div>
-            <article class="md:pl-5 pb-5 lg:pb-10 lg:mt-10">
+            <article class="pb-5 lg:pb-10 lg:mt-10">
                 <p class="max-w-3xl mt-5 text-xl text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Delectus iure dolore rem consectetur distinctio nesciunt libero nobis pariatur. Asperiores, commodi,
                     soluta architecto, rem nulla recusandae minus voluptatibus ad sapiente nisi est ullam ut numquam

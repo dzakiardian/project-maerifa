@@ -173,6 +173,11 @@
         // end: Chart
     </script>
 
+    {{-- day js --}}
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/plugin/relativeTime.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/locale/id.js"></script>
+
     {{-- CKEditor js --}}
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.22.0/full/ckeditor.js"></script>

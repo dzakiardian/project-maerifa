@@ -9,6 +9,12 @@
 
         <!-- Content -->
         <div class="p-6">
+            @session('success-message')
+                <div class="flex items-center justify-between alert alert-success toast-incorret mb-5">
+                    <span>{{ session('success-message') }}</span>
+                    <button class="btn btn-sm btn-outline text-white" onclick="hiddenToast('toast-incorret')">X</button>
+                </div>
+            @endsession
             <div class="card bg-base-100 w-auto lg:w-1/2 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">Your Data</h2>
@@ -82,7 +88,7 @@
                                     class="input input-bordered input-accent w-full max-w-xs" />
                                 <div class="label">
                                     @error('password_current')
-                                        <span class="label-text-alt">{{ $message }}</span>
+                                        <span class="label-text-alt text-red-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </label>
@@ -96,7 +102,7 @@
                                     class="input input-bordered input-accent w-full max-w-xs" />
                                 <div class="label">
                                     @error('password_new')
-                                        <span class="label-text-alt">{{ $message }}</span>
+                                        <span class="label-text-alt text-red-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </label>
@@ -112,10 +118,10 @@
                     <h2 class="card-title">Danger Zone</h2>
                     <p>Delete your account</p>
                     <div class="card-actions justify-end">
-                        <form action="" method="post">
+                        <form action="{{ route('dashboard.delete-user', ['id' => $userLogin->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-error" type="submit">Delete</button>
+                            <button class="btn btn-error text-white" onclick="return confirm('Sure delete this  account? \nEvery article also deleted')" type="submit">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -136,6 +142,12 @@
             } else {
                 btnEdit.innerText = 'Edit'
             }
+        }
+
+        // handle toast
+        function hiddenToast(triger) {
+            const toastMessage = document.querySelector(`.${triger}`);
+            toastMessage.classList.add('hidden');
         }
     </script>
 @endsection

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -37,6 +38,21 @@ class AuthController extends Controller
         return view('auth.register', [
             'pageTitle' => 'Register',
         ]);
+    }
+
+    public function register(Request $request): RedirectResponse
+    {
+        $rules = $request->validate([
+            'username' => ['required', 'min:3', 'max:50', 'string'],
+            'email' => ['required', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:8', 'string'],
+        ]);
+
+        $rules['role'] = 'user';
+
+        User::create($rules);
+
+        return redirect('/login');
     }
 
     public function logout(Request $request): RedirectResponse

@@ -28,11 +28,11 @@
                             <div class="block">
                                 <button class="w-full px-3 py-4 font-medium text-white bg-green-500 rounded-lg mb-3"
                                     data-primary="blue-600" data-rounded="rounded-lg">Sign In</button>
-                                <button type="submit" class="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg"
-                                    data-primary="blue-600" data-rounded="rounded-lg">Sign In with Google</button>
+                                {{-- <button type="submit" class="w-full px-3 py-4 font-medium text-white bg-blue-600 rounded-lg"
+                                    data-primary="blue-600" data-rounded="rounded-lg">Sign In with Google</button> --}}
                             </div>
                             <p class="w-full mt-4 text-sm text-center text-gray-500">Don't have an account? <a
-                                    href="#_" class="text-blue-500 underline">Sign up here</a></p>
+                                    href="/register" class="text-blue-500 underline">Sign up here</a></p>
                         </div>
                     </form>
                 </div>

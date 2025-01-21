@@ -19,7 +19,7 @@
                 <button class="btn bg-green-500 text-white font-bold px-10 mb-5 hover:bg-green-400"
                     onclick="document.location.href = '/dashboard/create-article'">Create Article</button>
                 <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow" placeholder="Search some article" />
+                    <input type="text" class="grow" oninput="handleSearchArticles(this.value)" placeholder="Search some article" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                         class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
@@ -28,15 +28,15 @@
                     </svg>
                 </label>
             </div>
-            <div class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
+            <div id="wrapper-articles" class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach ($articles as $article)
                     <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
                         <div class="card-body">
                             <h2 class="card-title">{{ $article->title }}</h2>
                             @if ($article->created_at == $article->updated_at)
-                            <p>Dibuat {{ $article->created_at->diffForHumans() }}</p>
+                                <p>Dibuat {{ $article->created_at->diffForHumans() }}</p>
                             @else
-                            <p>Diedit {{ $article->updated_at->diffForHumans() }}</p>
+                                <p>Diedit {{ $article->updated_at->diffForHumans() }}</p>
                             @endif
                             <div class="card-actions justify-end">
                                 <button class="btn bg-green-500 text-white hover:bg-green-400"
@@ -54,6 +54,44 @@
         function hiddenToast(triger) {
             const toastMessage = document.querySelector(`.${triger}`);
             toastMessage.classList.add('hidden');
+        }
+
+        // handle search articles
+        function handleSearchArticles(keySearch) {
+            const wrapperArticles = document.getElementById('wrapper-articles');
+            const url = `${document.location.origin}/dashboard/articles?q=${encodeURIComponent(keySearch)}`;
+
+            dayjs.extend(dayjs_plugin_relativeTime);
+            dayjs.locale('id');
+
+            fetch(url)
+                .then((result) => result.json())
+                .then((data) => {
+                    console.log(data);
+                    wrapperArticles.innerHTML = "";
+                    let cardArticles = "";
+                    if (data.articles.length > 0) {
+                        data.articles.forEach((item) => {
+                            cardArticles = `
+                            <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
+                                <div class="card-body">
+                                    <h2 class="card-title">${item.title}</h2>
+                                    ${item.created_at == item.updated_at ?
+                                        `<p>Dibuat ${dayjs(item.created_at).fromNow()}</p>`
+                                        :
+                                        `<p>Diedit ${dayjs(item.updated_at).fromNow()}</p>`}
+                                    <div class="card-actions justify-end">
+                                        <button class="btn bg-green-500 text-white hover:bg-green-400"
+                                            onclick="return document.location.href = '/dashboard/article/${item.slug}'">Show
+                                            Detail</button>
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            wrapperArticles.innerHTML += cardArticles;
+                        });
+                    }
+                });
         }
     </script>
 @endsection

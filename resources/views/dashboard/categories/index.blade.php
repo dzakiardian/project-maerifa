@@ -19,7 +19,8 @@
                 <button class="btn bg-green-500 text-white font-bold px-10 mb-5 hover:bg-green-400"
                     onclick="handleCreateCategory()" id="btn-create-category">Create Category</button>
                 <label class="input input-bordered flex items-center gap-2">
-                    <input type="text" class="grow" placeholder="Search some category" />
+                    <input type="text" class="grow" placeholder="Search some category"
+                        oninput="handleSearchCategories(this.value)" />
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"
                         class="h-4 w-4 opacity-70">
                         <path fill-rule="evenodd"
@@ -54,18 +55,19 @@
                     </form>
                 </div>
             </div>
-            <div class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
+            <div id="wrapper-categories" class="md:grid grid-rows-4 grid-cols-2 lg:grid-cols-3 gap-3">
                 @foreach ($categories as $category)
                     <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
                         <div class="card-body">
                             <h2 class="card-title">{{ $category->category_name }}</h2>
                             <p>{{ $category->created_at->diffForHumans() }}</p>
                             <div class="card-actions justify-end">
-                                <form action="{{ route('categories.delete-category', ['id' => $category->id]) }}" method="post">
+                                <form action="{{ route('categories.delete-category', ['id' => $category->id]) }}"
+                                    method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn bg-red-500 text-white hover:bg-red-400"
-                                    onclick="return confirm('Sure deleted this category?')">Delete</button>
+                                        onclick="return confirm('Sure deleted this category?')">Delete</button>
                                 </form>
                             </div>
                         </div>
@@ -75,6 +77,7 @@
         </div>
         <!-- End Content -->
     </main>
+    {{-- manual --}}
     <script>
         function hiddenToast(triger) {
             const toastMessage = document.querySelector(`.${triger}`);
@@ -97,6 +100,43 @@
             cardCreateCategory.classList.toggle('hidden');
             btnCreateCategory.innerText == 'Create Category' ? btnCreateCategory.innerText = 'Close' : btnCreateCategory
                 .innerText = 'Create Category';
+        }
+
+        // handle search categories
+        function handleSearchCategories(keySearch) {
+            const wrapperCategories = document.getElementById('wrapper-categories');
+            const url = `${document.location.origin}/dashboard/categories?q=${encodeURIComponent(keySearch)}`;
+
+            dayjs.extend(dayjs_plugin_relativeTime);
+            dayjs.locale('id');
+
+            fetch(url)
+                .then((result) => result.json())
+                .then((data) => {
+                    wrapperCategories.innerHTML = "";
+                    let cardCategories = "";
+                    if (data.categories.length > 0) {
+                        data.categories.forEach((item) => {
+                            cardCategories = `
+                        <div class="mb-3 md:mb-0 card bg-base-100 w-auto shadow-xl">
+                            <div class="card-body">
+                                <h2 class="card-title">${item.category_name}</h2>
+                                <p>${dayjs(item.created_at).fromNow()}</p>
+                                <div class="card-actions justify-end">
+                                    <form action="/dashboard/categories/${item.id}" method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn bg-red-500 text-white hover:bg-red-400"
+                                        onclick="return confirm('Sure deleted this category?')">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                            wrapperCategories.innerHTML += cardCategories;
+                        });
+                    }
+                });
         }
     </script>
 @endsection

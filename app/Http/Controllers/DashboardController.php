@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -78,16 +80,42 @@ class DashboardController extends Controller
         }
     }
 
-    public function articles(): View
+    public function deleteUser(Request $request, string $id)
     {
-        $articles = Article::where('user_id', '=', Auth::user()->id)->get();
-        $userLogin = Auth::user();
-        return view('dashboard.articles.index', [
-            'pageTitle' => 'Articles',
-            'active' => 'articles',
-            'userLogin' => $userLogin,
-            'articles' => $articles,
-        ]);
+        $user = User::find($id);
+        if(!$user || Auth::user()->id != $user->id) {
+            return back()->with("error-message", "User not found!");
+        }
+
+        $user->destroy($id);
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/');
+    }
+
+    public function articles(Request $request): View | JsonResponse
+    {
+        if($request->query('q')) {
+            $keySearch = $request->query('q');
+            $articles = Article::where([
+                ['title', 'LIKE', "%{$keySearch}%"],
+                ['user_id', '=', Auth::user()->id],
+            ])->get();
+
+            return response()->json(['articles' => $articles]);
+        } else {
+            $articles = Article::where('user_id', '=', Auth::user()->id)->get();
+            $userLogin = Auth::user();
+
+            return view('dashboard.articles.index', [
+                'pageTitle' => 'Articles',
+                'active' => 'articles',
+                'userLogin' => $userLogin,
+                'articles' => $articles,
+            ]);
+        }
     }
 
     public function detailArticle(string $slug): View
@@ -117,15 +145,21 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function categories()
+    public function categories(Request $request)
     {
-        $categories = Category::all();
-        $userLogin = Auth::user();
-        return view('dashboard.categories.index', [
-            'pageTitle' => 'Categories',
-            'active' => 'categories',
-            'userLogin' => $userLogin,
-            'categories' => $categories,
-        ]);
+        if($request->query('q')) {
+            $keySearch = $request->query('q');
+            $categories = Category::where("category_name", "LIKE", "%{$keySearch}%")->get();
+            return response()->json(['categories' => $categories]);
+        } else {
+            $categories = Category::all();
+            $userLogin = Auth::user();
+            return view('dashboard.categories.index', [
+                'pageTitle' => 'Categories',
+                'active' => 'categories',
+                'userLogin' => $userLogin,
+                'categories' => $categories,
+            ]);
+        }
     }
 }

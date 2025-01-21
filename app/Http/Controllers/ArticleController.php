@@ -57,10 +57,9 @@ class ArticleController extends Controller
             'title' => ['required', 'min:3', 'max:255'],
             'slug' => ['required', 'min:3', 'unique:articles,slug'],
             'categories' => ['required'],
+            'thumbnail' => ['image', 'mimes:png,jpg,jpeg', 'max:2048'],
             'content' => ['required'],
         ]);
-
-        $rules['created_at'] = 'CURRENT_TIMESTAMP()';
 
         $article = Article::where('slug', '=', $slug)->first();
 
