@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('page.home');
 Route::get('/about', [HomeController::class, 'about'])->name('page.article');
 Route::get('/articles', [HomeController::class, 'article'])->name('page.article');
-Route::get('/article/detail', [HomeController::class, 'detailArticle'])->name('page.detail-article');
+Route::get('/article/{slug}', [HomeController::class, 'detailArticle'])->name('page.detail-article');
 Route::get('/contact', [HomeController::class, 'contact'])->name('page.contact');
 
 Route::prefix('dashboard')->middleware(['auth'])->group(function() {

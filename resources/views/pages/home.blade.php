@@ -139,8 +139,8 @@
             <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
                 @foreach ($articles as $article)
                     <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                        <a href="#_" class="block">
-                            <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
+                        <a href="/article/{{ $article->slug }}" class="block">
+                            <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm h-52"
                                 src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}">
                         </a>
                         <div class="flex gap-x-1">
@@ -148,7 +148,7 @@
                             <span class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium text-white inline-block">{{ $category }}</span>
                             @endforeach
                         </div>
-                        <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200"><a href="#_">{{ $article->title }}</a></h2>
+                        <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200"><a href="/article/{{ $article->slug }}">{{ $article->title }}</a></h2>
                         <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">{{ $article->user->username }}</a> · <span class="mx-1">{{ $article->created_at->diffForHumans() }}</span>
                     </div>
                 @endforeach

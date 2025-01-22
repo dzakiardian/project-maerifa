@@ -27,7 +27,7 @@ class DashboardController extends Controller
             'pageTitle' => 'Dashboard',
             'active' => 'dashboard',
             'userLogin' => $userLogin,
-            'articles' => count($articles),
+            'articles' => $articles,
         ]);
     }
 

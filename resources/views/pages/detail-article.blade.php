@@ -7,7 +7,7 @@
             @include('components.navbar')
         </div>
         <section class="md:w-2/3 mx-5 lg:mx-24 mt-10 mb-5">
-            <div class">
+            <div>
                 <div class="items-start justify-center w-full h-full py-6 mb-6 md:mb-0">
                     <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:space-y-5">
                         <div
@@ -21,76 +21,22 @@
                             <span>Featured</span>
                         </div>
                         <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
-                                href="#_">Savory
-                                Templates. Sweet Designs.</a></h1>
-                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">John
-                                Doe</a> ·
-                            <span class="mx-1">April 23rd, 2021</span> · <span class="mx-1 text-gray-600">5 min.
-                                read</span>
+                                >{{ $article->title }}</a></h1>
+                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">{{ $article->user->username }}</a> ·
+                            <span class="mx-1">{{ $article->created_at->diffForHumans() }}</span>
                         </p>
                         </dib </div>
                         <div class="w-full">
-                            <a href="#_" class="block">
+                            <a class="block">
                                 <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
-                                    src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg">
+                                    src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}">
                             </a>
                         </div>
                     </div>
-                    <article class="lg:pb-10 lg:mt-10">
-                        <p class="max-w-3xl mt-5 text-xl text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit.
-                            Delectus iure dolore rem consectetur distinctio nesciunt libero nobis pariatur. Asperiores,
-                            commodi,
-                            soluta architecto, rem nulla recusandae minus voluptatibus ad sapiente nisi est ullam ut numquam
-                            exercitationem accusamus delectus? Nisi eveniet hic numquam ipsam eum necessitatibus, quos
-                            minima ipsa
-                            corrupti blanditiis, voluptates ab. Asperiores autem nemo quisquam, dicta quo cupiditate nam
-                            consectetur
-                            vero eveniet tempore. Libero eveniet repudiandae, placeat illo quod id doloribus inventore natus
-                            deserunt tempore cum quibusdam consequatur maiores, cumque iure explicabo dolorem, sint dolorum
-                            quis
-                            rerum quam nulla? Explicabo iure nemo sint repellat, architecto cupiditate nesciunt dicta error
-                            aut
-                            molestias! Assumenda doloribus magnam ducimus mollitia molestiae aut nobis? Atque id corporis et
-                            nobis
-                            corrupti consequatur. Assumenda incidunt sint quaerat nisi ex ipsum nemo a iusto, quasi
-                            voluptates quis,
-                            alias praesentium ab tempora ea. Adipisci, dolores natus tempora id tempore commodi voluptates
-                            ullam
-                            nihil voluptas reprehenderit repellendus laborum, quisquam nam dolorum soluta! Cupiditate
-                            delectus
-                            labore dicta! Labore aliquid, exercitationem natus esse expedita quos architecto porro magni
-                            perspiciatis facere temporibus aliquam at dolores sequi eligendi quia, enim dolorem, voluptates
-                            doloremque? Amet, inventore reprehenderit? Soluta consectetur distinctio voluptatum nesciunt
-                            esse natus
-                            quod eveniet dolores sed labore sequi itaque velit nam, officiis repellat.</p>
-                        <p class="max-w-3xl mt-5 text-xl text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit.
-                            Delectus iure dolore rem consectetur distinctio nesciunt libero nobis pariatur. Asperiores,
-                            commodi,
-                            soluta architecto, rem nulla recusandae minus voluptatibus ad sapiente nisi est ullam ut numquam
-                            exercitationem accusamus delectus? Nisi eveniet hic numquam ipsam eum necessitatibus, quos
-                            minima ipsa
-                            corrupti blanditiis, voluptates ab. Asperiores autem nemo quisquam, dicta quo cupiditate nam
-                            consectetur
-                            vero eveniet tempore. Libero eveniet repudiandae, placeat illo quod id doloribus inventore natus
-                            deserunt tempore cum quibusdam consequatur maiores, cumque iure explicabo dolorem, sint dolorum
-                            quis
-                            rerum quam nulla? Explicabo iure nemo sint repellat, architecto cupiditate nesciunt dicta error
-                            aut
-                            molestias! Assumenda doloribus magnam ducimus mollitia molestiae aut nobis? Atque id corporis et
-                            nobis
-                            corrupti consequatur. Assumenda incidunt sint quaerat nisi ex ipsum nemo a iusto, quasi
-                            voluptates quis,
-                            alias praesentium ab tempora ea. Adipisci, dolores natus tempora id tempore commodi voluptates
-                            ullam
-                            nihil voluptas reprehenderit repellendus laborum, quisquam nam dolorum soluta! Cupiditate
-                            delectus
-                            labore dicta! Labore aliquid, exercitationem natus esse expedita quos architecto porro magni
-                            perspiciatis facere temporibus aliquam at dolores sequi eligendi quia, enim dolorem, voluptates
-                            doloremque? Amet, inventore reprehenderit? Soluta consectetur distinctio voluptatum nesciunt
-                            esse natus
-                            quod eveniet dolores sed labore sequi itaque velit nam, officiis repellat.</p>
+                    <article class="lg:pb-10 lg:mt-10 max-w-3xl mt-5 text-xl text-gray-500">
+
+                        {!! $article->content !!}
+
                     </article>
         </section>
         <section id="comments" class="pb-5 px-3 lg:mx-24">
@@ -100,7 +46,7 @@
                     <div class="flex justify-start items-center gap-x-3">
                         <img src="{{ asset('assets/img/gebildet.png') }}" class="w-20 h-20 bg-slate-200 rounded-full" alt="profile">
                         <div class="text">
-                            <h3 class="text-base md:text-xl font-semibold">M Dzaki Ardiansyah</h3>
+                            <h3 class="text-base md:text-xl font-semibold">{{ $article->user->username }}</h3>
                             <p class="text-sm md:font-medium">Junior Fullstack Developer | Founder & CEO Codeauthentic</p>
                         </div>
                     </div>

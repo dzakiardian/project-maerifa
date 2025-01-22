@@ -35,11 +35,14 @@ class HomeController extends Controller
         ]);
     }
 
-    public function detailArticle()
+    public function detailArticle(string $slug)
     {
+        $article =  Article::with(['user'])->where('slug', '=', $slug)->first();
+
         return view('pages.detail-article', [
             'pageTitle' => 'Detail Article',
             'active' => 'detail-article',
+            'article' => $article,
         ]);
     }
 
