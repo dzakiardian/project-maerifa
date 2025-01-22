@@ -18,8 +18,8 @@
                     pernah kita lakukan.</p>
                 <div
                     class="relative flex items-center mx-auto mt-12 overflow-hidden text-left border border-gray-700 rounded-md md:max-w-md md:text-center">
-                    <input type="text" name="email" placeholder="Email Address"
-                        class="w-full h-12 px-6 py-2 font-medium text-gray-800 focus:outline-none">
+                    <input type="text" name="email" onchange="handleRegister(this.value)" placeholder="Email Address"
+                        class="w-full h-12 px-6 py-2 font-medium text-gray-800 focus:outline-none" required>
                     <span class="relative top-0 right-0 block">
                         <button type="button"
                             class="inline-flex items-center w-32 h-12 px-8 text-base font-bold leading-6 text-white transition duration-150 ease-in-out bg-gray-800 border border-transparent hover:bg-gray-700 focus:outline-none active:bg-gray-700"
@@ -137,117 +137,32 @@
             </div>
 
             <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/fruit.jpg">
-                    </a>
-                    <div
-                        class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Lifestyle</span>
+                @foreach ($articles as $article)
+                    <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
+                        <a href="#_" class="block">
+                            <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
+                                src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}">
+                        </a>
+                        <div class="flex gap-x-1">
+                            @foreach ($article->categories as $category)
+                            <span class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium text-white inline-block">{{ $category }}</span>
+                            @endforeach
+                        </div>
+                        <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200"><a href="#_">{{ $article->title }}</a></h2>
+                        <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">{{ $article->user->username }}</a> · <span class="mx-1">{{ $article->created_at->diffForHumans() }}</span>
                     </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200"><a href="#_">Creating a
-                            Future Worth
-                            Living</a></h2>
-                    <p class="text-sm text-gray-500">Learn the attributes you need to gain in order to build a future and
-                        create a life that you are truly happy with.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Mary
-                            Jane</a> · <span class="mx-1">April 17, 2021</span> · <span class="mx-1 text-gray-600">3
-                            min. read</span></p>
-                </div>
-
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/workout.jpg">
-                    </a>
-                    <div
-                        class="bg-pink-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Health</span>
-                    </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200">The Healther Version of Yourself
-                    </h2>
-                    <p class="text-sm text-gray-500">If you want to excel in life and become a better version of yourself,
-                        you'll need to upgrade your life.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Fred
-                            Jones</a> · <span class="mx-1">April 10, 2021</span> · <span class="mx-1 text-gray-600">3
-                            min. read</span></p>
-                </div>
-
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/food.jpg">
-                    </a>
-                    <div
-                        class="bg-red-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Food</span>
-                    </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200">Enjoy the Meals of the Kings</h2>
-                    <p class="text-sm text-gray-500">Take the time to enjoy the life that you've created. It's totally fine
-                        to live like kings and eat like royalty.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Mike
-                            Roberts</a> · <span class="mx-1">April 6, 2021</span> · <span class="mx-1 text-gray-600">3
-                            min. read</span></p>
-                </div>
-
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/books.jpg">
-                    </a>
-                    <div
-                        class="bg-blue-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Motivation</span>
-                    </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200">Writing for Success</h2>
-                    <p class="text-sm text-gray-500">Writing about your plans for success is extremely helpful for yourself
-                        and it will allow you to share your story.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Tom
-                            Johnson</a> · <span class="mx-1">May 25, 2021</span> · <span class="mx-1 text-gray-600">3
-                            min. read</span></p>
-                </div>
-
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/clock.jpg">
-                    </a>
-                    <div
-                        class="bg-gray-800 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Business</span>
-                    </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200">Simple Time Management</h2>
-                    <p class="text-sm text-gray-500">Managing your time can make the difference between getting ahead in
-                        life or staying exactly where you are.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Scott
-                            Reedman</a> ·
-                        <span class="mx-1">May 18, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span>
-                    </p>
-                </div>
-
-                <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                    <a href="#_" class="block">
-                        <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56"
-                            src="https://cdn.devdojo.com/images/may2021/lemons.jpg">
-                    </a>
-                    <div
-                        class="bg-yellow-400 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <span>Nutrition</span>
-                    </div>
-                    <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-slate-200">The Fruits Life</h2>
-                    <p class="text-sm text-gray-500">Take a moment and enjoy to enjoy the many fruits of life. Relaxation
-                        and a healthy diet can go a long way.</p>
-                    <p class="pt-2 text-xs font-medium text-slate-200"><a href="#_" class="mr-1 underline">Jake
-                            Caldwell</a> ·
-                        <span class="mx-1">May 15, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span>
-                    </p>
-                </div>
-
+                @endforeach
             </div>
         </div>
     </section>
     <hr class="text-slate-200">
     {{-- footer --}}
     @include('components.footer')
+    <script>
+        function handleRegister(email) {
+            sessionStorage.setItem('email', email);
+
+            console.log(sessionStorage.getItem('email'))
+        }
+    </script>
 @endsection

@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'anggelikaseptianingrum',
             'email' => 'anggelika@family.com',
             'password' => '28171728',
+            'photo_profile' => 'null',
             'role' => 'admin',
         ]);
     }

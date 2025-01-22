@@ -6,7 +6,7 @@
         <div class="mx-auto max-w-7xl">
             @include('components.navbar')
         </div>
-        <div class="h-screen about p-5">
+        <div class="md:h-screen about p-5">
             <h1 class="text-white text-3xl font-semibold text-center">What is Maerifa?</h1>
             <p class="max-w-3xl mt-5 mx-auto text-xl text-gray-500">Maerifa merupakan forum untuk belajar bersama dengan membuat atau membaca artikel. dalam forum ini tidak membahas ilmu spesifik atau hanya mendalami satu bidang ilmu saja, akan tetapi forum ini membahas banyak ilmu apapun sesuai dengan ilmu yang sudah banyak orang bagikan dalam forum ini.</p>
             <p class="max-w-3xl mt-5 mx-auto text-xl text-gray-500">jika kamu mempunyai ilmu jangan sungkan untuk membagikan nya kepada orang lain melalui forum maerifa ini. jangan merasa malu ataupun minder, semua karya artikel disini akan sangat dihargai tanpa terkecuali. bagikanlah pengetahuanmu sebanyak mungkin dalam forum ini karena siapa tau dengan ilmu yang kamu bagikan dapat membantu atau mengubah hidup seseorang jauh lebih baik lagi.</p>

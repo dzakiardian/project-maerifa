@@ -15,9 +15,12 @@
                     <button class="btn btn-sm btn-outline text-white" onclick="hiddenToast('toast-incorret')">X</button>
                 </div>
             @endsession
+
             <div class="card bg-base-100 w-auto lg:w-1/2 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">Your Data</h2>
+                    <img @if($userLogin->photo_profile) src="{{ asset('storage/photo-profiles/' . $userLogin->photo_profile) }}" @else src="{{ asset('assets/img/gebildet.png') }}" @endif class="w-20 h-20 mx-auto rounded-full bg-slate-300"
+                        alt="photo profile">
                     <table class="mt-5">
                         <tr>
                             <td>username</td>
@@ -38,18 +41,34 @@
             <div id="card-edit-profile" class="hidden mt-5 card bg-base-100 w-auto lg:w-1/2 shadow-xl">
                 <div class="card-body">
                     <h2 class="card-title">Edit Data</h2>
-                    <form action="{{ route('dashboard.update-profile', ['id' => $userLogin->id]) }}" method="post">
+                    <form action="{{ route('dashboard.update-profile', ['id' => $userLogin->id]) }}" method="post" enctype="multipart/form-data">
                         @csrf
+                        <div class="mb-2">
+                            <label class="form-control w-full max-w-xs">
+                                <div class="label">
+                                    <span class="label-text font-semibold">Photo Profile</span>
+                                </div>
+                                <input type="file"
+                                    name="photo_profile"
+                                    class="file-input file-input-bordered file-input-success w-full max-w-xs" />
+                                <div class="label">
+                                    @error('photo_profile')
+                                         <span class="label-text-alt text-red-600">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                            </label>
+                        </div>
                         <div class="mb-2">
                             <label class="form-control w-full max-w-xs">
                                 <div class="label">
                                     <span class="label-text font-semibold">username</span>
                                 </div>
                                 <input type="text" name="username" placeholder="Type here"
-                                    class="input input-bordered input-accent w-full max-w-xs" value="{{ $userLogin->username }}" />
+                                    class="input input-bordered input-accent w-full max-w-xs"
+                                    value="{{ $userLogin->username }}" />
                                 <div class="label">
                                     @error('username')
-                                    <span class="label-text-alt">{{ $message }}</span>
+                                        <span class="label-text-alt text-red-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </label>
@@ -60,10 +79,11 @@
                                     <span class="label-text font-semibold">email</span>
                                 </div>
                                 <input type="email" name="email" placeholder="Type here"
-                                    class="input input-bordered input-accent w-full max-w-xs" value="{{ $userLogin->email }}" />
+                                    class="input input-bordered input-accent w-full max-w-xs"
+                                    value="{{ $userLogin->email }}" />
                                 <div class="label">
                                     @error('email')
-                                    <span class="label-text-alt">{{ $message }}</span>
+                                        <span class="label-text-alt text-red-600">{{ $message }}</span>
                                     @enderror
                                 </div>
                             </label>
@@ -121,7 +141,9 @@
                         <form action="{{ route('dashboard.delete-user', ['id' => $userLogin->id]) }}" method="post">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-error text-white" onclick="return confirm('Sure delete this  account? \nEvery article also deleted')" type="submit">Delete</button>
+                            <button class="btn btn-error text-white"
+                                onclick="return confirm('Sure delete this  account? \nEvery article also deleted')"
+                                type="submit">Delete</button>
                         </form>
                     </div>
                 </div>
@@ -137,7 +159,7 @@
         function showCardEditProfile() {
             cardEditProfile.classList.toggle('hidden');
 
-            if(btnEdit.innerText == 'Edit') {
+            if (btnEdit.innerText == 'Edit') {
                 btnEdit.innerText = 'Close';
             } else {
                 btnEdit.innerText = 'Edit'

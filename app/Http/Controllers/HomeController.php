@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -9,9 +10,12 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $articles = Article::with(['user'])->paginate(12);
+
         return view('pages.home', [
             'pageTitle' => '',
             'active' => '',
+            'articles' => $articles,
         ]);
     }
 

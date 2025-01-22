@@ -14,17 +14,20 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $userLogin = Auth::user();
+        $articles = Article::where('user_id', '=', $userLogin->id);
 
         return view('dashboard.index', [
             'pageTitle' => 'Dashboard',
             'active' => 'dashboard',
             'userLogin' => $userLogin,
+            'articles' => count($articles),
         ]);
     }
 
@@ -42,13 +45,24 @@ class DashboardController extends Controller
     public function updateProfile(Request $request, string $id)
     {
         $rules = $request->validate([
+            'photo_profile' => ['image', 'mimes:png,jpg,svg', 'max:2048'],
             'username' => ['required', 'min:3', 'max:50'],
             'email' => ['required', 'email'],
         ]);
 
         try {
             $user = User::findOrFail($id);
+
+            if ($request->hasFile('photo_profile')) {
+                if ($user->photo_profile) {
+                    Storage::disk('public')->delete('photo-profiles/' . $user->photo_profile);
+                }
+                $fileName = time() . '.' . $request->file('photo_profile')->getClientOriginalExtension();
+                $request->file('photo_profile')->storeAs('photo-profiles', $fileName, 'public');
+                $rules['photo_profile'] = $fileName;
+            }
             $user->update($rules);
+
             return back()->with('success-message', 'Profile success updated!');
         } catch (ModelNotFoundException $e) {
             return back()->with('error-message', 'User not found:(');
@@ -83,7 +97,7 @@ class DashboardController extends Controller
     public function deleteUser(Request $request, string $id)
     {
         $user = User::find($id);
-        if(!$user || Auth::user()->id != $user->id) {
+        if (!$user || Auth::user()->id != $user->id) {
             return back()->with("error-message", "User not found!");
         }
 
@@ -97,7 +111,7 @@ class DashboardController extends Controller
 
     public function articles(Request $request): View | JsonResponse
     {
-        if($request->query('q')) {
+        if ($request->query('q')) {
             $keySearch = $request->query('q');
             $articles = Article::where([
                 ['title', 'LIKE', "%{$keySearch}%"],
@@ -147,7 +161,7 @@ class DashboardController extends Controller
 
     public function categories(Request $request)
     {
-        if($request->query('q')) {
+        if ($request->query('q')) {
             $keySearch = $request->query('q');
             $categories = Category::where("category_name", "LIKE", "%{$keySearch}%")->get();
             return response()->json(['categories' => $categories]);

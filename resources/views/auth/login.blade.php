@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('main')
-    <section class="h-screen flex items-center px-8 py-16 bg-black xl:px-8">
+    <section class="md:h-screen flex items-center px-8 py-16 bg-black xl:px-8">
         <div class="max-w-5xl mx-auto border border-white p-5 rounded-lg">
             <div class="flex flex-col items-center md:flex-row">
 
