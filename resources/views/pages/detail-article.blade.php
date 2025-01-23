@@ -6,43 +6,57 @@
         <div class="mx-auto max-w-7xl">
             @include('components.navbar')
         </div>
-        <section class="md:w-2/3 mx-5 lg:mx-24 mt-10 mb-5">
-            <div>
-                <div class="items-start justify-center w-full h-full py-6 mb-6 md:mb-0">
-                    <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:space-y-5">
-                        <div
-                            class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                            <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                                </path>
-                            </svg>
-                            <span>Featured</span>
+        <div class="md:flex justify-between">
+            <section class="md:w-[70%] mx-5 lg:ml-24 mt-10 mb-5">
+                <div class="border border-white md:p-5 rounded-lg box-border">
+                    <div class="items-start justify-center w-full h-full py-6 mb-6 md:mb-0">
+                        <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:space-y-5">
+                            <div
+                                class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
+                                <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
+                                    </path>
+                                </svg>
+                                <span>Featured</span>
+                            </div>
+                            <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
+                                    >{{ $article->title }}</a></h1>
+                            <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">{{ $article->user->username }}</a> ·
+                                <span class="mx-1">{{ $article->created_at->diffForHumans() }}</span>
+                            </p>
+                            </dib </div>
+                            <div class="w-full">
+                                <a class="block">
+                                    <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
+                                        src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}">
+                                </a>
+                            </div>
                         </div>
-                        <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
-                                >{{ $article->title }}</a></h1>
-                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">{{ $article->user->username }}</a> ·
-                            <span class="mx-1">{{ $article->created_at->diffForHumans() }}</span>
-                        </p>
-                        </dib </div>
-                        <div class="w-full">
-                            <a class="block">
-                                <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
-                                    src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}">
-                            </a>
-                        </div>
-                    </div>
-                    <article class="lg:pb-10 lg:mt-10 max-w-3xl mt-5 text-xl text-gray-500">
+                        <article class="lg:pb-10 lg:mt-10 max-w-3xl mt-5 text-xl text-gray-500">
 
-                        {!! $article->content !!}
+                            {!! $article->content !!}
 
-                    </article>
-        </section>
+                        </article>
+            </section>
+            <section class="md:w-[30%] mx-5 lg:mr-24 mt-10">
+                <div class="border border-white p-5 rounded-lg box-border">
+                    <h3 class="text-2xl font-semibold text-white mb-5">Mungkin kamu tertarik dengan artikel dibawah ini</h3>
+                    <ul>
+                        <li class="text-white my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit</li>
+                        <li class="text-white my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit</li>
+                        <li class="text-white my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit</li>
+                        <li class="text-white my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit</li>
+                        <li class="text-white my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
         <section id="comments" class="pb-5 px-3 lg:mx-24">
             <div class="card bg-base-100 w-full shadow-xl mx-auto mt-5 lg:w-2/3 lg:mx-0">
                 <div class="card-body">
-                    <h2 class="card-title">Creator</h2>
+                    <h2 class="card-title">Creator Article</h2>
                     <div class="flex justify-start items-center gap-x-3">
                         <img src="{{ asset('assets/img/gebildet.png') }}" class="w-20 h-20 bg-slate-200 rounded-full" alt="profile">
                         <div class="text">

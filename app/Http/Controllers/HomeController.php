@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Contracts\View\View as ViewView;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -43,6 +44,14 @@ class HomeController extends Controller
             'pageTitle' => 'Detail Article',
             'active' => 'detail-article',
             'article' => $article,
+        ]);
+    }
+
+    public function newArticle(): View
+    {
+        return view('pages.new-detail-article', [
+            'pageTitle' => 'Detail Article',
+            'active' => 'detail-article',
         ]);
     }
 

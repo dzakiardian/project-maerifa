@@ -17,6 +17,7 @@ Route::get('/', [HomeController::class, 'index'])->name('page.home');
 Route::get('/about', [HomeController::class, 'about'])->name('page.article');
 Route::get('/articles', [HomeController::class, 'article'])->name('page.article');
 Route::get('/article/{slug}', [HomeController::class, 'detailArticle'])->name('page.detail-article');
+Route::get('/articless/new', [HomeController::class, 'newArticle'])->name('page.new-article');
 Route::get('/contact', [HomeController::class, 'contact'])->name('page.contact');
 
 Route::prefix('dashboard')->middleware(['auth'])->group(function() {
