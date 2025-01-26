@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use Illuminate\Contracts\View\View as ViewView;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -11,12 +12,14 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $articles = Article::with(['user'])->paginate(12);
+        $firstArticle = Article::with(['user'])->where('id', '=', '37528')->first();
+        $articles = Article::inRandomOrder()->with(['user'])->paginate(12);
 
         return view('pages.home', [
             'pageTitle' => '',
             'active' => '',
             'articles' => $articles,
+            'firstArticle' => $firstArticle,
         ]);
     }
 
@@ -28,22 +31,47 @@ class HomeController extends Controller
         ]);
     }
 
-    public function article(): View
+    public function article(Request $request): View | JsonResponse
     {
+        if($request->query('q')) {
+            $keySearch = $request->query('q');
+            $articles = Article::inRandomOrder()
+            ->with(['user'])
+            ->where('title', 'like', "%{$keySearch}%")
+            ->orWhere('slug', 'like', "%{$keySearch}%")
+            ->orWhereHas('user', function($query) use ($request) {
+                $keySearch = $request->query('q');
+                $query->where('username', 'like', "%{$keySearch}%");
+            })
+            ->orWhere('categories', 'like', "%{$keySearch}%")
+            ->paginate(12);
+
+            return response()->json(['articles' => $articles]);
+
+        } else {
+            $articles = Article::inRandomOrder()->with(['user'])->paginate(12);
+        }
+
+        $firstArticle = Article::with(['user'])->where('id', '=', '37528')->first();
+
         return view('pages.article', [
             'pageTitle' => 'Article',
             'active' => 'article',
+            'articles' => $articles,
+            'firstArticle' => $firstArticle,
         ]);
     }
 
     public function detailArticle(string $slug)
     {
+        $randomArticles = Article::inRandomOrder()->limit(10)->get();
         $article =  Article::with(['user'])->where('slug', '=', $slug)->first();
 
         return view('pages.detail-article', [
             'pageTitle' => 'Detail Article',
             'active' => 'detail-article',
             'article' => $article,
+            'randomArticles' => $randomArticles,
         ]);
     }
 
