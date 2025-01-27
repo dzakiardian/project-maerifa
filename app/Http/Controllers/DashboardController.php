@@ -21,7 +21,7 @@ class DashboardController extends Controller
     public function index()
     {
         $userLogin = Auth::user();
-        $articles = Article::where('user_id', '=', $userLogin->id);
+        $articles = Article::where('user_id', '=', $userLogin->id)->get();
 
         return view('dashboard.index', [
             'pageTitle' => 'Dashboard',

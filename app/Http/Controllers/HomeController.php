@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $firstArticle = Article::with(['user'])->where('id', '=', '37528')->first();
+        $firstArticle = Article::with(['user'])->where('id', '=', '50150')->first();
         $articles = Article::inRandomOrder()->with(['user'])->paginate(12);
 
         return view('pages.home', [
@@ -52,7 +52,7 @@ class HomeController extends Controller
             $articles = Article::inRandomOrder()->with(['user'])->paginate(12);
         }
 
-        $firstArticle = Article::with(['user'])->where('id', '=', '37528')->first();
+        $firstArticle = Article::with(['user'])->where('id', '=', '50150')->first();
 
         return view('pages.article', [
             'pageTitle' => 'Article',

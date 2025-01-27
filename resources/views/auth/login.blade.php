@@ -40,7 +40,7 @@
             </div>
         </div>
 
-        <div class="toast toast-top toast-end">
+        <div class="toast toast-top toast-end z-20">
             @error('email')
             <div class="flex alert alert-error toast-email">
                 <span>{{ $message }}</span>

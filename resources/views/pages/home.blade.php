@@ -106,26 +106,26 @@
             </div>
             <div class="flex flex-col items-center sm:px-5 md:flex-row">
                 <div class="w-full md:w-1/2">
-                    <a href="{{ $firstArticle->slug }}" class="block">
+                    <a href="/article/{{ $firstArticle?->slug }}" class="block">
                         <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96"
-                            src="/storage/thumbnails/{{ $firstArticle->thumbnail }}">
+                            src="/storage/thumbnails/{{ $firstArticle?->thumbnail }}">
                     </a>
                 </div>
                 <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
                     <div
                         class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
                         <div class="flex gap-x-1">
-                            @foreach ($firstArticle->categories as $category)
-                            <div
-                                class="bg-green-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium text-white inline-block">
-                                <span>{{ $category }}</span>
-                            </div>
-                            @endforeach
+                                @foreach ($firstArticle->categories as $category)
+                                <div
+                                    class="bg-green-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium text-white inline-block">
+                                    <span>{{ $category }}</span>
+                                </div>
+                                @endforeach
                         </div>
                         <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
-                                href="{{ $firstArticle->slug }}">{{ $firstArticle->title }}</a></h1>
-                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">J{{ $firstArticle->user->username }}</a> ·
-                            <span class="mx-1">{{ $firstArticle->created_at->diffForHumans() }}</span>
+                                href="/article/{{ $firstArticle?->slug }}">{{ $firstArticle?->title }}</a></h1>
+                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">J{{ $firstArticle?->user->username }}</a> ·
+                            <span class="mx-1">{{ $firstArticle?->created_at->diffForHumans() }}</span>
                         </p>
                     </div>
                 </div>

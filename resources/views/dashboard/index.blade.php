@@ -16,7 +16,7 @@
                     <div class="flex justify-between mb-6">
                         <div>
                             <div class="flex items-center mb-1">
-                                <div class="text-2xl font-semibold">2</div>
+                                <div class="text-2xl font-semibold">{{ count($articles) }}</div>
                             </div>
                             <div class="text-sm font-medium text-gray-400">Articles</div>
                         </div>

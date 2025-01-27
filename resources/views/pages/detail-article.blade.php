@@ -6,6 +6,7 @@
         article h1 {
             font-size: 50px;
             margin: 15px, 0px, 15px, 0px;
+            line-height: 45px;
         }
 
         article h2 {
@@ -35,6 +36,7 @@
 
         article img {
             border-radius: 10px;
+            margin: 0 auto;
         }
 
         ul {
@@ -141,7 +143,13 @@
                 <div class="card-body">
                     <h2 class="card-title">Creator Article</h2>
                     <div class="flex justify-start items-center gap-x-3">
-                        <img src="{{ asset('assets/img/gebildet.png') }}" class="w-20 h-20 bg-slate-200 rounded-full"
+                        <img
+                            @if ($article->user->photo_profile)
+                            src="{{ asset('storage/photo-profiles/' . $article->user->photo_profile) }}"
+                            @else
+                            src="{{ asset('assets/img/gebildet.png') }}"
+                            @endif
+                            class="w-20 h-20 bg-slate-200 rounded-full"
                             alt="profile">
                         <div class="text">
                             <h3 class="text-base md:text-xl font-semibold">{{ $article->user->username }}</h3>
