@@ -79,10 +79,11 @@
 
             article img {
                 border-radius: 10px;
+                margin-bottom: 20px;
             }
 
             ul {
-                mmargin-top: 20px;
+                margin-top: 20px;
                 margin-bottom: 20px;
             }
         }
