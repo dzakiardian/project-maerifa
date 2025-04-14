@@ -126,7 +126,7 @@
                         </div>
                         <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
                                 href="/article/{{ $firstArticle?->slug }}">{{ $firstArticle?->title }}</a></h1>
-                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">J{{ $firstArticle?->user->username }}</a> ·
+                        <p class="pt-2 text-sm font-medium text-slate-200">by <a href="#_" class="mr-1 underline">{{ $firstArticle?->user->username }}</a> ·
                             <span class="mx-1">{{ $firstArticle?->created_at->diffForHumans() }}</span>
                         </p>
                     </div>

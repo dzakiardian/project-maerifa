@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $firstArticle = Article::with(['user'])->where('id', '=', '50150')->first();
+        $firstArticle = Article::with(['user'])->where('slug', 'belajar-cara-membuat-artikel-di-maerifa')->first();
         $articles = Article::inRandomOrder()->with(['user'])->paginate(12);
 
         return view('pages.home', [
