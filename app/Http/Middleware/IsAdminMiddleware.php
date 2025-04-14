@@ -16,8 +16,8 @@ class IsAdminMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user()->role != 'admin' || Auth::user()->email == 'muhammaddzakiardiansyah811@gmail.com') {
-            return redirect('/dashboard');
+        if(Auth::user()->role != 'admin') {
+            return redirect('/');
         }
         return $next($request);
     }
