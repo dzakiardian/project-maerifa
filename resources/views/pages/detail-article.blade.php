@@ -36,6 +36,11 @@
 
         article a {
             color: rgb(45, 190, 45);
+            font-weight: 500;
+        }
+
+        article a:hover {
+            text-decoration: underline;
         }
 
         article img {
