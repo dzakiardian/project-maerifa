@@ -34,6 +34,10 @@
             margin-bottom: 20px;
         }
 
+        article a {
+            color: rgb(45, 190, 45);
+        }
+
         article img {
             border-radius: 10px;
             margin: 0 auto;
