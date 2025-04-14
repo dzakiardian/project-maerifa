@@ -115,12 +115,14 @@
                     <div
                         class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
                         <div class="flex gap-x-1">
-                                @foreach ($firstArticle->categories as $category)
+                                @if ($firstArticle)
+                                @foreach ($firstArticle?->categories as $category)
                                 <div
                                     class="bg-green-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium text-white inline-block">
                                     <span>{{ $category }}</span>
                                 </div>
                                 @endforeach
+                                @endif
                         </div>
                         <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl text-slate-200"><a
                                 href="/article/{{ $firstArticle?->slug }}">{{ $firstArticle?->title }}</a></h1>
