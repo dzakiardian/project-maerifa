@@ -27,7 +27,6 @@
                 </li>
             </ul>
         </li>
-        @if (Auth::user()->role == 'admin')
         <li class="mb-1 group">
             <a href=""
                 class="flex font-semibold items-center py-2 px-4  hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100 sidebar-dropdown-toggle {{ $active === 'categories' ? 'bg-gray-950 text-gray-100' : 'text-gray-900' }}">
@@ -42,7 +41,6 @@
                 </li>
             </ul>
         </li>
-        @endif
         <span class="text-gray-400 font-bold">Article</span>
         <li class="mb-1 group">
             <a href=""
